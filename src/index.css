@@ -11,7 +11,7 @@ input,button{
     border:none;
     outline: none;
 }
-.App{
+.login{
     height: 100vh;
     display: flex;
     align-items: center;

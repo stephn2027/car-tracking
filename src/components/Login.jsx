@@ -12,7 +12,7 @@ const handleSubmit = e=>{
 
 }
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className='login'>
       <div className="form-inner">
         <h2>Login</h2>
         {(error!=="")?<div className='error'>{error}</div>:""}

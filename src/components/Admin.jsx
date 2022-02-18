@@ -1,21 +1,23 @@
 import React from 'react';
 import { Routes,Route } from 'react-router-dom';
 import ManagerDashboard from './ManagerDashboard';
-import NavBar from './Navbar';
+import Nav from './Nav';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Tracking from './Tracking';
+import Customer from './Customer';
+import Car from './Car';
 export default function Admin({user,logout}) {
     return (
     <React.Fragment>
-    <NavBar user={user} logout={logout}></NavBar>
-        <div className="admin-dashboard">
-        <h2>
-          welcome, Admin <span>{user.name}</span>
-        </h2>
-        <button onClick={logout}>Logout</button>
-
-      </div>
+    <Nav user={user} logout={logout}></Nav>
+     <div style={{paddingTop:"75px"}}>   
       <Routes>
-          <Route path="/" component={<ManagerDashboard/>} />
+          <Route exact path="/" element={<ManagerDashboard/>} />
+          <Route path="/tracking" element={<Tracking/>} />
+          <Route path="/customer" element={<Customer/>} />
+          <Route path="/car" element={<Car/>} />
       </Routes>
+      </div>
       </React.Fragment>
     )
 }
