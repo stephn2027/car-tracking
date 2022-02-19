@@ -14,8 +14,8 @@ export default function NavBar({ user, logout }) {
             City
           </NavLink>
 
-          <NavLink to="/customer" className="nav-links">
-            Customer
+          <NavLink to="/users" className="nav-links">
+            Users
           </NavLink>
 
           <NavLink to="/car" className="nav-links">
@@ -26,7 +26,7 @@ export default function NavBar({ user, logout }) {
             Tracking
           </NavLink>
 
-          <NavLink to="/logout" onClick={logout} className="nav-links">
+          <NavLink to="/" onClick={logout} className="nav-links">
             Logout
           </NavLink>
         </Nav>

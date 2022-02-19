@@ -4,9 +4,9 @@ export default function Operator({user, logout}) {
     return (
         <div className="operator-dashboard">
         <h2>
-          welcome, Operator <span>{user.name}</span>
+          welcome, <span>{user.name}</span>
         </h2>
-        <button onClick={logout}>Logout</button>
+        <button className='btn btn-outline-dark' onClick={logout}>Logout</button>
       </div>
     )
 }
