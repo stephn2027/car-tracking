@@ -16,6 +16,7 @@ export default function Admin({
   managers,
   operators,
   deleteOperator,
+  addOperator,
 }) {
   const [cities, setCities] = useState([]);
   const [cars, setCars] = useState([]);
@@ -55,6 +56,7 @@ export default function Admin({
       car: city.car,
       operator: city.operator,
     };
+    
     setCities([...cities,newCity])
   };
 
@@ -93,6 +95,7 @@ export default function Admin({
                 managers={managers}
                 operators={operators}
                 deleteOperator={deleteOperator}
+                addOperator={addOperator}
               />
             }
           />
