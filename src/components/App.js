@@ -14,14 +14,10 @@ function App() {
     email: 'user@user.com',
     password: 'user123',
   });
-  const admin = [
-    { name: 'Chelsey', email: 'admin@admin.com', password: 'admin123' },
-    { name: 'Tabitha', email: 'admin2@admin.com', password: 'admintwo' },
-  ];
-  const operators = [
-    { name: 'Jessie', email: 'user@user.com', password: 'user123' },
-    { name: 'Patrick', email: 'user2@user.com', password: 'usertwo' },
-  ];
+
+  const [operators,setOperators] = useState(operatorsList);
+  const [managers,setmanagers] = useState(adminList);
+  
   const [user, setUser] = useState({ name: '', email: '' });
   const [error, setError] = useState('');
 
@@ -46,8 +42,16 @@ function App() {
       email: operator.email,
       password: operator.password,
     };
-    operators.push(newOperator);
+    setOperators(...operators,newOperator);
   };
+
+  const deleteOperator=(operator_id)=>{
+    const filteredOperators = operators.filter(o=>o.email!==operator_id);
+    setOperators(filteredOperators);
+  };
+
+ 
+
 
   const generateSixDigitCode = () => {
     return Math.floor(100000 + Math.random() * 900000);
@@ -57,12 +61,13 @@ function App() {
     <React.Fragment>
       <div className="App">
         {user.email !== '' ? (
-          user.email === admin.email ? (
+          user.email === currentAdmin.email ? (
             <Admin
               user={user}
               logout={logout}
               addOperator={addOperator}
-              admin={admin}
+              deleteOperator={deleteOperator}
+              managers={managers}
               operators={operators}
             />
           ) : (
@@ -75,5 +80,14 @@ function App() {
     </React.Fragment>
   );
 }
+
+const adminList = [
+  { name: 'Chelsey', email: 'admin@admin.com', password: 'admin123' },
+  { name: 'Tabitha', email: 'admin2@admin.com', password: 'admintwo' },
+];
+const operatorsList = [
+  { name: 'Jessie', email: 'user@user.com', password: 'user123' },
+  { name: 'Patrick', email: 'user2@user.com', password: '' },
+];
 
 export default App;

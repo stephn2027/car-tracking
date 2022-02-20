@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Button, Form } from 'react-bootstrap';
 
+
 function Login({login,error}) {
   
 const [details,setDetails] = useState({name:"",email:"",password:""})

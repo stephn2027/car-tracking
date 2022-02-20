@@ -28,3 +28,10 @@ export function getCities() {
     console.log(error);
   }
 }
+export function getCars(){
+    try {
+        return axios.get('https://raw.githubusercontent.com/vega/vega/master/docs/data/cars.json')
+    } catch (error) {
+        console.log(error);
+    }
+}

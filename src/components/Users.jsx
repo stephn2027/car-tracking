@@ -1,9 +1,11 @@
 import React from 'react'
 import {v4 as uuid} from 'uuid';
-function Users(operators,managers,handleDelete,handleChange) {
+function Users(props) {
+   const {operators,managers,deleteOperator,addOperator,handleUserChange}=props;
     return (
         
     <main className='container'>
+    
      <table className="table">
         <thead>
           <tr>
@@ -15,26 +17,44 @@ function Users(operators,managers,handleDelete,handleChange) {
             <th></th>
           </tr>
         </thead>
+       
         <tbody>
-          {/* {operators.map((operator, i) => {
+         Managers
+        {managers.map((m,i)=>{
+            m.id = uuid();
+            return (
+                <tr key={m.id}>
+                <td>{i+1}</td>
+                <td>{m.name}</td>
+                <td>{m.email}</td>
+                <td style={{fontStyle:"italic"}}>Hidden</td>
+                </tr>
+            )
+        })}
+
+        </tbody>
+       
+        <tbody>
+        Operators
+          {operators.map((operator, i) => {
             operator.id = uuid();
             return (
-              <tr key={uuid()}>
+              <tr key={operator.id}>
                  
                 <td>{i + 1}</td>
                 <td>{operator.name}</td>
                 <td>{operator.email}</td>
-                <td>{operator.password}</td>
+                <td style={{fontStyle:"italic"}}>{operator.password!==""?operator.password:"not yet assigned"}</td>
                 
                 <td>
-                  <button className="btn btn-danger" onClick={handleDelete(operator.email)}>Delete</button>
+                  <button className="btn btn-danger" onClick={()=>deleteOperator(operator.id)}>Delete</button>
                 </td>
                 <td>
-                  <button className="btn btn-info" onClick={handleChange(operator.id)}>Change</button>
+                  <button className="btn btn-info" onClick={()=>handleUserChange(operator.id)}>Change</button>
                 </td>
               </tr>
             );
-          })} */}
+          })}
         </tbody>
       </table>
         </main>
