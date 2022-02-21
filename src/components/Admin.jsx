@@ -25,6 +25,7 @@ export default function Admin({
     async function fetchData() {
       let { data: cities } = await getCities();
       const citiesComplete = cities.map((city) => {
+        city.id = uuid();
         city.car = '';
         city.operator = '';
         return city;
@@ -45,12 +46,14 @@ export default function Admin({
     const citiesCopy = cities.filter((c) => c.city !== city.city);
     setCities(citiesCopy);
   };
-  const handleChange = (city_id) => {
-    console.log(city_id);
+  const handleCityChange = (e,city_id) => {
+    e.preventDefault();
+    
   };
 
   const handleCitySubmit = (city) => {
     const newCity = {
+      id:uuid(),
       city: city.city,
       admin_name: city.prefecture,
       car: city.car,
@@ -60,6 +63,13 @@ export default function Admin({
     setCities([...cities,newCity])
   };
 
+  const handleCityUpdate = (cityDetails,city_id)=>{
+    const editedCity = [...cities];
+    const index = editedCity.findIndex(c=>c.id==city_id)
+    editedCity[index] = cityDetails;
+    setCities(editedCity);
+  }
+
   const deleteCar = (car_id) => {
     setCars(cars.filter((c) => c.id !== car_id));
   };
@@ -67,6 +77,17 @@ export default function Admin({
   const handleCarChange = (car_id) => {
     console.log(car_id);
   };
+
+  const handleCarSubmit=(carDetails)=>{
+      const newCar = {
+          id:uuid(),
+          Name:carDetails.name,
+          Miles_per_Gallon:carDetails.milesPerGallon,
+          Year:carDetails.year,
+          Cylinders:carDetails.cylinders,
+      }
+      setCars([...cars,newCar]);
+  }
 
   return (
     <React.Fragment>
@@ -80,10 +101,11 @@ export default function Admin({
               <City
                 cities={cities}
                 handleCitySubmit={handleCitySubmit}
-                handleChange={handleChange}
+                handleCityChange={handleCityChange}
                 handleDelete={handleDelete}
                 cars={cars}
                 operators={operators}
+                handleCityUpdate={handleCityUpdate}
               />
             }
           />
@@ -106,6 +128,7 @@ export default function Admin({
                 cars={cars}
                 deleteCar={deleteCar}
                 handleCarChange={handleCarChange}
+                handleCarSubmit={handleCarSubmit}
               />
             }
           />

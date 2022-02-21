@@ -10,6 +10,7 @@ export default function TableHead() {
             <th>Prefecture</th>
             <th>Car</th>
             <th>Operator</th>
+            <th>Actions</th>
             <th></th>
             <th></th>
           </tr>

@@ -9,11 +9,18 @@ function Users(props) {
     email: '',
     password: '',
   });
+  const [isChecked, setCheck] = useState(false);
+  const handleCheck = () => setCheck(!isChecked);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     addOperator(operatorDetails);
-    console.log(operatorDetails);
+    setOperatorDetails({
+      name: '',
+      email: '',
+      password: '',
+    });
+    handleCheck();
   };
 
   const generateSixDigitCode = () => {
@@ -98,7 +105,7 @@ function Users(props) {
               id="autoSizingInput"
               placeholder="Enter Name"
               onChange={(e) =>
-                setOperatorDetails({...operatorDetails, name: e.target.value, })
+                setOperatorDetails({ ...operatorDetails, name: e.target.value })
               }
               value={operatorDetails.name}
             />
@@ -130,12 +137,16 @@ function Users(props) {
                 className="form-check-input"
                 type="checkbox"
                 id="autoSizingCheck"
-                onChange={(e) =>
+                checked={isChecked}
+                onChange={() =>{
                   setOperatorDetails({
                     ...operatorDetails,
-                    password:generateSixDigitCode()
+                    password: generateSixDigitCode(),
                   })
+                  handleCheck()
                 }
+                }
+                
               />
               <label className="form-check-label" htmlFor="autoSizingCheck">
                 Generate password?
@@ -143,9 +154,8 @@ function Users(props) {
             </div>
           </div>
 
-          <div className="col-auto form-inner">
-            <input type="submit" className="btn btn-primary" value="Add"/>
-             
+          <div className="col-auto form-inner" style={{paddingInline:"10px"}}>
+            <input type="submit" className="btn btn-primary" value="Add" />
           </div>
         </div>
       </form>

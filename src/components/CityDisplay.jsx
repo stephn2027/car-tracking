@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function CityDisplay({city,handleDelete,handleChange,index}) {
+export default function CityDisplay({city,handleDelete,handleEdit,index}) {
     return (
         
         <tr>
@@ -14,7 +14,7 @@ export default function CityDisplay({city,handleDelete,handleChange,index}) {
                    <button className="btn btn-danger" onClick={()=>handleDelete(city)}>Delete</button>
                  </td>
                  <td>
-                   <button className="btn btn-info" onClick={()=>handleChange(city.id)}>Edit</button>
+                   <button className="btn btn-info" onClick={(e)=>handleEdit(e,city.id)}>Edit</button>
                  </td>
         </tr>
             
