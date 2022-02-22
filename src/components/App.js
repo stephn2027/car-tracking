@@ -47,6 +47,13 @@ function App() {
     setOperators([...operators, newOperator]);
   };
 
+  const handleUserChange =(userDetails,user_id)=>{
+    const newOperator = [...operators];
+    const index = newOperator.findIndex(o=>o.id===user_id)
+    newOperator[index] = userDetails;
+    setOperators(newOperator);
+  }
+
   const deleteOperator = (operator_id) => {
     const filteredOperators = operators.filter((o) => o.id !== operator_id);
     setOperators(filteredOperators);
@@ -65,6 +72,7 @@ function App() {
               managers={managers}
               operators={operators}
               setOperator={setOperator}
+              handleUserChange={handleUserChange}
             />
           ) : (
             <Operator user={user} logout={logout} />
@@ -82,8 +90,8 @@ const adminList = [
   { name: 'Tabitha', email: 'admin2@admin.com', password: 'admintwo' },
 ];
 const operatorsList = [
-  { name: 'Jessie', email: 'user@user.com', password: 'user123' },
-  { name: 'Patrick', email: 'user2@user.com', password: '' },
+  { id:uuid(),name: 'Jessie', email: 'user@user.com', password: 'user123' },
+  { id:uuid(),name: 'Patrick', email: 'user2@user.com', password: '' },
 ];
 
 export default App;

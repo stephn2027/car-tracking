@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
+import { Fragment } from 'react';
+import CarDisplay from './CarDisplay';
+import CarEdit from './CarEdit';
 
 function Car(props) {
-  const { cars, handleCarChange, deleteCar, handleCarSubmit } = props;
+  const { cars, handleCarUpdate, deleteCar, handleCarSubmit } = props;
   const [carDetails, setCarDetails] = useState({
     name: '',
     milesPerGallon: '',
     year: '',
     cylinders: '',
   });
+  const [editCarId, setEditCarId] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -15,52 +19,60 @@ function Car(props) {
     setCarDetails({ name: '', milesPerGallon: '', year: '', cylinders: '' });
   };
 
+  const handleEditCarId = (e, car_id) => {
+    e.preventDefault();
+    setEditCarId(car_id);
+  };
+
+  const handleCancelClick = () => {
+    setEditCarId(null);
+  };
+
   return (
     <main className="container">
-      <table className="table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Miles/Gallon</th>
-            <th>Year</th>
-            <th>Cylinders</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
+      <form>
+        <table className="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Miles/Gallon</th>
+              <th>Year</th>
+              <th>Cylinders</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
 
-        <tbody>
-          {cars.map((car, i) => {
-            return (
-              <tr key={car.id}>
-                <td>{i + 1}</td>
-                <td>{car.Name}</td>
-                <td>{car.Miles_per_Gallon}</td>
-                <td>{car.Year}</td>
-                <td>{car.Cylinders}</td>
-
-                <td>
-                  <button
-                    className="btn btn-danger"
-                    onClick={() => deleteCar(car.id)}
-                  >
-                    Delete
-                  </button>
-                </td>
-                <td>
-                  <button
-                    className="btn btn-info"
-                    onClick={() => handleCarChange(car.id)}
-                  >
-                    Change
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+          <tbody>
+            {cars.map((car, i) => {
+              return (
+                <Fragment key={car.id}>
+                  {editCarId === car.id ? (
+                    <CarEdit
+                      key={car.id}
+                      car={car}
+                      handleCancelClick={handleCancelClick}
+                      handleCarUpdate={handleCarUpdate}
+                      setEditCarId={setEditCarId}
+                      carID={car.id}
+                      i={i}
+                    />
+                  ) : (
+                    <CarDisplay
+                      key={car.id}
+                      car={car}
+                      deleteCar={deleteCar}
+                      handleEditCarId={handleEditCarId}
+                      i={i}
+                    />
+                  )}
+                </Fragment>
+              );
+            })}
+          </tbody>
+        </table>
+      </form>
       <form onSubmit={handleSubmit}>
         <div className="row gy-2 gx-3 align-items-center">
           <div className="col-auto">

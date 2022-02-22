@@ -22,16 +22,16 @@ export function getCities() {
     return axios.get(
       'https://raw.githubusercontent.com/stephn2027/FCCweb/main/myProjects/citySearch/jp.json'
     );
-
-   
   } catch (error) {
     console.log(error);
   }
 }
-export function getCars(){
-    try {
-        return axios.get('https://raw.githubusercontent.com/vega/vega/master/docs/data/cars.json')
-    } catch (error) {
-        console.log(error);
-    }
+export function getCars() {
+  try {
+    return axios.get(
+      'https://raw.githubusercontent.com/vega/vega/master/docs/data/cars.json'
+    );
+  } catch (error) {
+    console.log(error);
+  }
 }

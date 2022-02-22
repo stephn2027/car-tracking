@@ -1,6 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
 import { v4 as uuid } from 'uuid';
+import UsersDisplay from './UsersDisplay';
+import UsersEdit from './UsersEdit';
 function Users(props) {
   const { operators, managers, deleteOperator, addOperator, handleUserChange } =
     props;
@@ -9,6 +11,7 @@ function Users(props) {
     email: '',
     password: '',
   });
+  const [editUserId, setEditUserId] = useState(null);
   const [isChecked, setCheck] = useState(false);
   const handleCheck = () => setCheck(!isChecked);
 
@@ -27,72 +30,76 @@ function Users(props) {
     return Math.floor(100000 + Math.random() * 900000);
   };
 
+  const handleEditClick = (user_id) => {
+   
+    setEditUserId(user_id);
+  };
+  const handleCancelClick = () => {
+    setEditUserId(null);
+  };
+  
+
   return (
     <main className="container">
-      <table className="table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Password</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
+      <form >
+        <table className="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Password</th>
+              <th>Actions</th>
+              <th></th>
+            </tr>
+          </thead>
 
-        <tbody>
-          Managers
-          {managers.map((m, i) => {
-            m.id = uuid();
-            return (
-              <tr key={m.id}>
-                <td>{i + 1}</td>
-                <td>{m.name}</td>
-                <td>{m.email}</td>
-                <td style={{ fontStyle: 'italic' }}>Hidden</td>
-              </tr>
-            );
-          })}
-        </tbody>
+          <tbody>
+           <tr>Managers</tr> 
+            {managers.map((m, i) => {
+              m.id = uuid();
+              return (
+                <tr key={m.id}>
+                  <td>{i + 1}</td>
+                  <td>{m.name}</td>
+                  <td>{m.email}</td>
+                  <td style={{ fontStyle: 'italic' }}>Hidden</td>
+                </tr>
+              );
+            })}
+          </tbody>
 
-        <tbody>
-          Operators
-          {operators.map((operator, i) => {
-            operator.id = uuid();
-            return (
-              <tr key={operator.id}>
-                <td>{i + 1}</td>
-                <td>{operator.name}</td>
-                <td>{operator.email}</td>
-                <td style={{ fontStyle: 'italic' }}>
-                  {operator.password !== ''
-                    ? operator.password
-                    : 'not yet assigned'}
-                </td>
-
-                <td>
-                  <button
-                    className="btn btn-danger"
-                    onClick={() => deleteOperator(operator.id)}
-                  >
-                    Delete
-                  </button>
-                </td>
-                <td>
-                  <button
-                    className="btn btn-info"
-                    onClick={() => handleUserChange(operator.id)}
-                  >
-                    Change
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-
+          <tbody>
+            <tr>Operators</tr> 
+            {operators.map((operator, i) => {
+              
+              return (
+                <React.Fragment key={i}>
+                  {editUserId !== null ? (
+                    <UsersEdit
+                      key={operator.id}
+                      operator={operator}
+                      handleCancelClick={handleCancelClick}
+                      handleUserChange={handleUserChange}
+                      setEditUserId={setEditUserId}
+                      userID={operator.id}
+                      i={i}
+                    />
+                  ) : (
+                    <UsersDisplay
+                      i={i}
+                      key={operator.id}
+                      operator={operator}
+                      handleEditClick={handleEditClick}
+                      deleteOperator={deleteOperator}
+                    />
+                  )}
+                </React.Fragment>
+              );
+            })}
+          </tbody>
+        </table>
+      </form>
       <form onSubmit={handleSubmit}>
         <div className="row gy-2 gx-3 align-items-center">
           <div className="col-auto">
@@ -154,7 +161,7 @@ function Users(props) {
 
           <div
             className="col-auto form-inner"
-            style={{ paddingInline: '10px' }}
+            style={{ padding: '0px', margin: '10px' }}
           >
             <input type="submit" className="btn btn-primary" value="Add" />
           </div>

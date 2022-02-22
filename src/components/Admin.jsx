@@ -17,6 +17,7 @@ export default function Admin({
   operators,
   deleteOperator,
   addOperator,
+  handleUserChange,
 }) {
   const [cities, setCities] = useState([]);
   const [cars, setCars] = useState([]);
@@ -73,8 +74,11 @@ export default function Admin({
     setCars(cars.filter((c) => c.id !== car_id));
   };
 
-  const handleCarChange = (car_id) => {
-    console.log(car_id);
+  const handleCarUpdate = (car_id, carEditDetails) => {
+    const newCars = [...cars];
+    const index = newCars.findIndex((c) => c.id === car_id);
+    newCars[index] = carEditDetails;
+    setCars(newCars);
   };
 
   const handleCarSubmit = (carDetails) => {
@@ -117,6 +121,7 @@ export default function Admin({
                 operators={operators}
                 deleteOperator={deleteOperator}
                 addOperator={addOperator}
+                handleUserChange={handleUserChange}
               />
             }
           />
@@ -126,7 +131,7 @@ export default function Admin({
               <Car
                 cars={cars}
                 deleteCar={deleteCar}
-                handleCarChange={handleCarChange}
+                handleCarUpdate={handleCarUpdate}
                 handleCarSubmit={handleCarSubmit}
               />
             }
