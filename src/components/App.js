@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Login from './Login';
 import Admin from './Admin';
 import Operator from './Operator';
-import {v4 as uuid} from 'uuid';
+import { v4 as uuid } from 'uuid';
 import '../App.css';
 
 function App() {
@@ -16,9 +16,9 @@ function App() {
     password: 'user123',
   });
 
-  const [operators,setOperators] = useState(operatorsList);
-  const [managers,setmanagers] = useState(adminList);
-  
+  const [operators, setOperators] = useState(operatorsList);
+  const [managers, setmanagers] = useState(adminList);
+
   const [user, setUser] = useState({ name: '', email: '' });
   const [error, setError] = useState('');
 
@@ -44,18 +44,13 @@ function App() {
       email: operator.email,
       password: operator.password,
     };
-    setOperators([...operators,newOperator]);
+    setOperators([...operators, newOperator]);
   };
 
-  const deleteOperator=(operator_id)=>{
-    const filteredOperators = operators.filter(o=>o.id!==operator_id);
+  const deleteOperator = (operator_id) => {
+    const filteredOperators = operators.filter((o) => o.id !== operator_id);
     setOperators(filteredOperators);
   };
-
- 
-
-
-  
 
   return (
     <React.Fragment>
@@ -70,7 +65,6 @@ function App() {
               managers={managers}
               operators={operators}
               setOperator={setOperator}
-              
             />
           ) : (
             <Operator user={user} logout={logout} />

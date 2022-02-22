@@ -1,15 +1,22 @@
 import React, { useState } from 'react';
 
-export default function CityEdit({ city, handleCityUpdate, cityID }) {
+export default function CityEdit({
+  city,
+  handleCityUpdate,
+  cityID,
+  setEditCityID,
+  handleCancelClick,
+}) {
   const [cityEditedDetails, setCityEditedDetails] = useState({
     city: city.city,
     admin_name: city.admin_name,
     car: city.car,
-    operator: city.operator 
+    operator: city.operator,
   });
 
   const handleSubmit = () => {
-    handleCityUpdate(cityEditedDetails,cityID);
+    handleCityUpdate(cityEditedDetails, cityID);
+    setEditCityID(null);
     // setCityEditedDetails({ city: city, admin_name: city.admin_name });
   };
   return (
@@ -22,9 +29,11 @@ export default function CityEdit({ city, handleCityUpdate, cityID }) {
           placeholder="Enter name"
           name="city"
           onChange={(e) =>
-            setCityEditedDetails({...cityEditedDetails, city: e.target.value })
+            setCityEditedDetails({ ...cityEditedDetails, city: e.target.value })
           }
-          value={cityEditedDetails.city ===""?city.city:cityEditedDetails.city}
+          value={
+            cityEditedDetails.city === '' ? city.city : cityEditedDetails.city
+          }
         />
       </td>
       <td>
@@ -39,13 +48,30 @@ export default function CityEdit({ city, handleCityUpdate, cityID }) {
               admin_name: e.target.value,
             })
           }
-          value={cityEditedDetails.admin_name ===""?city.city:cityEditedDetails.admin_name}
+          value={
+            cityEditedDetails.admin_name === ''
+              ? city.city
+              : cityEditedDetails.admin_name
+          }
         />
       </td>
       <td>{city.car}</td>
       <td>{city.operator}</td>
       <td>
-        <input type="submit" value="Save" onClick={handleSubmit} />
+        <input
+          type="submit"
+          value="Save"
+          className="btn btn-primary"
+          onClick={handleSubmit}
+        />
+      </td>
+      <td>
+        <input
+          type="submit"
+          value="Cancel"
+          className="btn btn-info"
+          onClick={handleCancelClick}
+        />
       </td>
     </tr>
   );
