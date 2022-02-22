@@ -1,6 +1,12 @@
 /* Nav */
-.container{
-   
+.leaflet-container{
+  width: 100vw;
+  height: 100vh; 
+  max-width: 1400px;
+  min-width: 95%;
+  margin-inline: auto;
+  margin-right: 3rem;
+  margin-left: -3rem;
 }
 
 .nav .nav-links{

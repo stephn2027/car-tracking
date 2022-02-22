@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { getCities, getCars } from '../services/httpService';
 import { v4 as uuid } from 'uuid';
@@ -46,29 +46,28 @@ export default function Admin({
     const citiesCopy = cities.filter((c) => c.city !== city.city);
     setCities(citiesCopy);
   };
-  const handleCityChange = (e,city_id) => {
+  const handleCityChange = (e, city_id) => {
     e.preventDefault();
-    
   };
 
   const handleCitySubmit = (city) => {
     const newCity = {
-      id:uuid(),
+      id: uuid(),
       city: city.city,
       admin_name: city.prefecture,
       car: city.car,
       operator: city.operator,
     };
-    
-    setCities([...cities,newCity])
+
+    setCities([...cities, newCity]);
   };
 
-  const handleCityUpdate = (cityDetails,city_id)=>{
+  const handleCityUpdate = (cityDetails, city_id) => {
     const editedCity = [...cities];
-    const index = editedCity.findIndex(c=>c.id==city_id)
+    const index = editedCity.findIndex((c) => c.id === city_id);
     editedCity[index] = cityDetails;
     setCities(editedCity);
-  }
+  };
 
   const deleteCar = (car_id) => {
     setCars(cars.filter((c) => c.id !== car_id));
@@ -78,16 +77,16 @@ export default function Admin({
     console.log(car_id);
   };
 
-  const handleCarSubmit=(carDetails)=>{
-      const newCar = {
-          id:uuid(),
-          Name:carDetails.name,
-          Miles_per_Gallon:carDetails.milesPerGallon,
-          Year:carDetails.year,
-          Cylinders:carDetails.cylinders,
-      }
-      setCars([...cars,newCar]);
-  }
+  const handleCarSubmit = (carDetails) => {
+    const newCar = {
+      id: uuid(),
+      Name: carDetails.name,
+      Miles_per_Gallon: carDetails.milesPerGallon,
+      Year: carDetails.year,
+      Cylinders: carDetails.cylinders,
+    };
+    setCars([...cars, newCar]);
+  };
 
   return (
     <React.Fragment>

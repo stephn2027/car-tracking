@@ -138,15 +138,13 @@ function Users(props) {
                 type="checkbox"
                 id="autoSizingCheck"
                 checked={isChecked}
-                onChange={() =>{
+                onChange={() => {
                   setOperatorDetails({
                     ...operatorDetails,
                     password: generateSixDigitCode(),
-                  })
-                  handleCheck()
-                }
-                }
-                
+                  });
+                  handleCheck();
+                }}
               />
               <label className="form-check-label" htmlFor="autoSizingCheck">
                 Generate password?
@@ -154,7 +152,10 @@ function Users(props) {
             </div>
           </div>
 
-          <div className="col-auto form-inner" style={{paddingInline:"10px"}}>
+          <div
+            className="col-auto form-inner"
+            style={{ paddingInline: '10px' }}
+          >
             <input type="submit" className="btn btn-primary" value="Add" />
           </div>
         </div>

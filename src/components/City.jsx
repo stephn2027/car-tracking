@@ -41,9 +41,9 @@ function City(props) {
     e.preventDefault();
     setEditCityId(null);
   };
-  const handleCancelClick =()=>{
+  const handleCancelClick = () => {
     setEditCityId(null);
-  }
+  };
   return (
     <main className="container">
       <form onSubmit={handleEditedCity}>

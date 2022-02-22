@@ -1,14 +1,19 @@
-import React, {useState } from 'react';
+import React, { useState } from 'react';
 
 function Car(props) {
-  const { cars, handleCarChange, deleteCar,handleCarSubmit } = props;
-  const [carDetails,setCarDetails] = useState({name:"",milesPerGallon:"",year:"",cylinders:""})
+  const { cars, handleCarChange, deleteCar, handleCarSubmit } = props;
+  const [carDetails, setCarDetails] = useState({
+    name: '',
+    milesPerGallon: '',
+    year: '',
+    cylinders: '',
+  });
 
-  const handleSubmit=(e)=>{
+  const handleSubmit = (e) => {
     e.preventDefault();
     handleCarSubmit(carDetails);
-    setCarDetails({name:"",milesPerGallon:"",year:"",cylinders:""})
-  }
+    setCarDetails({ name: '', milesPerGallon: '', year: '', cylinders: '' });
+  };
 
   return (
     <main className="container">
@@ -73,10 +78,10 @@ function Car(props) {
               value={carDetails.name}
             />
           </div>
-          
+
           <div className="col-auto">
             <label className="visually-hidden" htmlFor="autoSizingInput">
-             Miles/Gallon
+              Miles/Gallon
             </label>
             <input
               type="text"
@@ -89,7 +94,7 @@ function Car(props) {
               value={carDetails.milesPerGallon}
             />
           </div>
-          
+
           <div className="col-auto">
             <label className="visually-hidden" htmlFor="autoSizingInput">
               Year
@@ -105,7 +110,7 @@ function Car(props) {
               value={carDetails.year}
             />
           </div>
-         
+
           <div className="col-auto">
             <label className="visually-hidden" htmlFor="autoSizingInput">
               Cylinders
@@ -121,10 +126,9 @@ function Car(props) {
               value={carDetails.cylinders}
             />
           </div>
-          <div className='col-auto form-inner' style={{padding:"0px"}}>
-              <input type="submit" value="Add"/>
+          <div className="col-auto form-inner" style={{ padding: '0px' }}>
+            <input type="submit" value="Add" />
           </div>
-         
         </div>
       </form>
     </main>
