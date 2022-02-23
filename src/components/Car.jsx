@@ -4,7 +4,7 @@ import CarDisplay from './CarDisplay';
 import CarEdit from './CarEdit';
 
 function Car(props) {
-  const { cars, handleCarUpdate, deleteCar, handleCarSubmit } = props;
+  const { cars, handleCarUpdate, deleteCar, handleCarSubmit,  } = props;
   const [carDetails, setCarDetails] = useState({
     name: '',
     milesPerGallon: '',
@@ -28,9 +28,14 @@ function Car(props) {
     setEditCarId(null);
   };
 
+  const handleUpdateSubmit = (e)=>{
+    e.preventDefault();
+    setEditCarId(null);
+  }
+
   return (
     <main className="container">
-      <form>
+      <form onSubmit={handleUpdateSubmit}>
         <table className="table">
           <thead>
             <tr>
@@ -47,16 +52,16 @@ function Car(props) {
           <tbody>
             {cars.map((car, i) => {
               return (
-                <Fragment key={car.id}>
+                <Fragment>
                   {editCarId === car.id ? (
                     <CarEdit
-                      key={car.id}
+                      
                       car={car}
                       handleCancelClick={handleCancelClick}
                       handleCarUpdate={handleCarUpdate}
                       setEditCarId={setEditCarId}
                       carID={car.id}
-                      i={i}
+                      
                     />
                   ) : (
                     <CarDisplay

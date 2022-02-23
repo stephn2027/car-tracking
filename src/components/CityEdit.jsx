@@ -50,7 +50,7 @@ export default function CityEdit({
           }
           value={
             cityEditedDetails.admin_name === ''
-              ? city.city
+              ? city.admin_name
               : cityEditedDetails.admin_name
           }
         />

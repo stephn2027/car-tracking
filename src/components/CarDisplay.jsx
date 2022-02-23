@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function CarDisplay({ car, deleteCar, handleEditCarId, i }) {
   return (
-    <tr key={car.id}>
+    <tr>
       <td>{i + 1}</td>
       <td>{car.Name}</td>
       <td>{car.Miles_per_Gallon}</td>
@@ -19,7 +19,7 @@ export default function CarDisplay({ car, deleteCar, handleEditCarId, i }) {
           className="btn btn-info"
           onClick={(e) => handleEditCarId(e, car.id)}
         >
-          Change
+          Edit
         </button>
       </td>
     </tr>

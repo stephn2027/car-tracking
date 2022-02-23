@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 
-export default function CarEdit({ car, i, handleCancelClick, handleCarUpdate, carID, setEditCarId }) {
-  
-
+export default function CarEdit({
+  car,
+  handleCancelClick,
+  handleCarUpdate,
+  carID,
+  setEditCarId,
+}) {
   const [carEditDetails, setCarEditDetails] = useState({
     name: car.Name,
     milesPerGallon: car.Miles_per_Gallon,
@@ -11,12 +15,12 @@ export default function CarEdit({ car, i, handleCancelClick, handleCarUpdate, ca
   });
 
   const handleSubmitUpdate = () => {
-    handleCarUpdate(carID, carEditDetails);
+    handleCarUpdate( carEditDetails,carID);
     setEditCarId(null);
   };
   return (
     <tr>
-      <td>{i + 1}</td>
+      <td></td>
       <td>
         <input
           type="text"
@@ -26,7 +30,7 @@ export default function CarEdit({ car, i, handleCancelClick, handleCarUpdate, ca
           onChange={(e) =>
             setCarEditDetails({ ...carEditDetails, name: e.target.value })
           }
-          value={carEditDetails.name === '' ? car.Name : carEditDetails.name}
+          value={carEditDetails.name}
         />
       </td>
       <td>
@@ -51,7 +55,7 @@ export default function CarEdit({ car, i, handleCancelClick, handleCarUpdate, ca
 
       <td>
         <input
-          type="date"
+          type="text"
           required="required"
           placeholder="Enter date"
           name="date"

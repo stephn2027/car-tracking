@@ -43,13 +43,13 @@ export default function Admin({
     fetchData();
   }, []);
 
+
+
   const handleDelete = (city) => {
     const citiesCopy = cities.filter((c) => c.city !== city.city);
     setCities(citiesCopy);
   };
-  const handleCityChange = (e, city_id) => {
-    e.preventDefault();
-  };
+  
 
   const handleCitySubmit = (city) => {
     const newCity = {
@@ -74,11 +74,14 @@ export default function Admin({
     setCars(cars.filter((c) => c.id !== car_id));
   };
 
-  const handleCarUpdate = (car_id, carEditDetails) => {
+  const handleCarUpdate = (carEditDetails,car_id) => {
+    
     const newCars = [...cars];
     const index = newCars.findIndex((c) => c.id === car_id);
     newCars[index] = carEditDetails;
     setCars(newCars);
+    
+    
   };
 
   const handleCarSubmit = (carDetails) => {
@@ -104,7 +107,7 @@ export default function Admin({
               <City
                 cities={cities}
                 handleCitySubmit={handleCitySubmit}
-                handleCityChange={handleCityChange}
+                
                 handleDelete={handleDelete}
                 cars={cars}
                 operators={operators}
