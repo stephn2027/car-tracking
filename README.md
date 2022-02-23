@@ -1,5 +1,15 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+
+
+//Logins 
+
+
+Admin password: admin123
+User password: user123
+
+
+//
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
