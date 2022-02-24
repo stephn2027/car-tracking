@@ -13,6 +13,7 @@ function Login({ login, error }) {
     <form onSubmit={handleSubmit} className="login">
       <div className="form-inner">
         <h2>Login</h2>
+
         {error !== '' ? <div className="error">{error}</div> : ''}
         <div className="form-group">
           <label htmlFor="name">Name:</label>
@@ -48,6 +49,8 @@ function Login({ login, error }) {
           />
         </div>
         <input type="submit" value="LOGIN" />
+        <p>Admin password: admin123</p>
+        <p>User password: user123</p>
       </div>
     </form>
   );

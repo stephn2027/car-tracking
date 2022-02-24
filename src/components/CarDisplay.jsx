@@ -9,12 +9,12 @@ export default function CarDisplay({ car, deleteCar, handleEditCarId, i }) {
       <td>{car.Year}</td>
       <td>{car.Cylinders}</td>
 
-      <td>
+      <td className='col-sm'>
         <button className="btn btn-danger" onClick={() => deleteCar(car.id)}>
           Delete
         </button>
       </td>
-      <td>
+      <td className='col-sm'>
         <button
           className="btn btn-info"
           onClick={(e) => handleEditCarId(e, car.id)}

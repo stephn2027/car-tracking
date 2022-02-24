@@ -80,7 +80,8 @@ export default function Admin({
     const index = newCars.findIndex((c) => c.id === car_id);
     newCars[index] = carEditDetails;
     setCars(newCars);
-    
+    console.log(newCars);
+
     
   };
 

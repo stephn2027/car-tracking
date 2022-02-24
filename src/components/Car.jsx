@@ -78,6 +78,7 @@ function Car(props) {
           </tbody>
         </table>
       </form>
+      
       <form onSubmit={handleSubmit}>
         <div className="row gy-2 gx-3 align-items-center">
           <div className="col-auto">

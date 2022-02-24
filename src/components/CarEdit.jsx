@@ -8,10 +8,10 @@ export default function CarEdit({
   setEditCarId,
 }) {
   const [carEditDetails, setCarEditDetails] = useState({
-    name: car.Name,
-    milesPerGallon: car.Miles_per_Gallon,
-    year: car.Year,
-    cylinders: car.Cylinders,
+    Name: car.Name,
+    Miles_per_Gallon: car.Miles_per_Gallon,
+    Year: car.Year,
+    Cylinders: car.Cylinders,
   });
 
   const handleSubmitUpdate = () => {
@@ -28,9 +28,9 @@ export default function CarEdit({
           placeholder="Enter name"
           name="name"
           onChange={(e) =>
-            setCarEditDetails({ ...carEditDetails, name: e.target.value })
+            setCarEditDetails({ ...carEditDetails, Name: e.target.value })
           }
-          value={carEditDetails.name}
+          value={carEditDetails.Name}
         />
       </td>
       <td>
@@ -42,13 +42,13 @@ export default function CarEdit({
           onChange={(e) =>
             setCarEditDetails({
               ...carEditDetails,
-              milesPerGallon: e.target.value,
+              Miles_per_Gallon: e.target.value,
             })
           }
           value={
-            carEditDetails.milesPerGallon === ''
+            carEditDetails.Miles_per_Gallon === ''
               ? car.Miles_per_Gallon
-              : carEditDetails.milesPerGallon
+              : carEditDetails.Miles_per_Gallon
           }
         />
       </td>
@@ -60,9 +60,9 @@ export default function CarEdit({
           placeholder="Enter date"
           name="date"
           onChange={(e) =>
-            setCarEditDetails({ ...carEditDetails, year: e.target.value })
+            setCarEditDetails({ ...carEditDetails, Year: e.target.value })
           }
-          value={carEditDetails.year === '' ? car.Year : carEditDetails.year}
+          value={carEditDetails.Year === '' ? car.Year : carEditDetails.Year}
         />
       </td>
       <td>
@@ -72,12 +72,12 @@ export default function CarEdit({
           placeholder="Enter cylinders"
           name="cylinders"
           onChange={(e) =>
-            setCarEditDetails({ ...carEditDetails, cylinders: e.target.value })
+            setCarEditDetails({ ...carEditDetails, Cylinders: e.target.value })
           }
           value={
-            carEditDetails.cylinders === ''
+            carEditDetails.Cylinders === ''
               ? car.Cylinders
-              : carEditDetails.cylinders
+              : carEditDetails.Cylinders
           }
         />
       </td>
