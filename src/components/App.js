@@ -62,6 +62,7 @@ function App() {
   return (
     <React.Fragment>
       <div className="App">
+      
         {user.email !== '' ? (
           user.email === currentAdmin.email ? (
             <Admin
@@ -80,6 +81,7 @@ function App() {
         ) : (
           <Login login={login} error={error} />
         )}
+        
       </div>
     </React.Fragment>
   );

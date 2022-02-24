@@ -11,6 +11,7 @@ function Login({ login, error }) {
   };
   return (
     <form onSubmit={handleSubmit} className="login">
+    
       <div className="form-inner">
         <h2>Login</h2>
 
@@ -49,9 +50,10 @@ function Login({ login, error }) {
           />
         </div>
         <input type="submit" value="LOGIN" />
-        <p>Admin password: admin123</p>
-        <p>User password: user123</p>
+        <p>Admin Email/password: admin@admin.com / admin123</p>
+        <p>User Email/password: user@user.com / user123</p>
       </div>
+     
     </form>
   );
 }
