@@ -13,10 +13,9 @@ import NavOperator from './NavOperator';
 import carIcon from '../64px-Circle-icons-car.svg.png';
 import locationIcon from '../location-svgrepo-com.svg';
 
-
 export function LocationMarker({ msg }) {
   const [position, setPosition] = useState(null);
-  
+
   const map = useMapEvents({
     click() {
       map.locate();
@@ -42,8 +41,8 @@ export function LocationMarker({ msg }) {
 
 export default function Operator({ user, logout }) {
   const [cities, setCities] = useState([]);
-  const [currentCity,setCurrentCity] = useState(null);
-  
+  const [currentCity, setCurrentCity] = useState(null);
+
   const [cars, setCars] = useState([]);
   useEffect(() => {
     async function fetchData() {
@@ -66,12 +65,10 @@ export default function Operator({ user, logout }) {
     fetchData();
   }, []);
 
-  
   const locIcon = new Icon({
-    iconUrl:locationIcon,
-    iconSize: [45,45],
-
-  }) 
+    iconUrl: locationIcon,
+    iconSize: [45, 45],
+  });
   return (
     <React.Fragment>
       <NavOperator user={user} logout={logout}></NavOperator>
@@ -82,11 +79,12 @@ export default function Operator({ user, logout }) {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           {cities.map((city) => (
-            <Marker key={city.id} position={[city.lat, city.lng]}
-            icon={locIcon}
+            <Marker
+              key={city.id}
+              position={[city.lat, city.lng]}
+              icon={locIcon}
             >
-            
-              <Popup position={[city.lat, city.lng]} >
+              <Popup position={[city.lat, city.lng]}>
                 <h2>{city.city}</h2>
               </Popup>
             </Marker>

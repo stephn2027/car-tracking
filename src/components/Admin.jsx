@@ -23,6 +23,7 @@ export default function Admin({
   const [cars, setCars] = useState([]);
 
   useEffect(() => {
+    
     async function fetchData() {
       let { data: cities } = await getCities();
       const citiesComplete = cities.map((city) => {
@@ -40,9 +41,24 @@ export default function Admin({
       });
       setCars(carsWithID.slice(0, 10));
     }
-    fetchData();
-  }, []);
+    const citiesFromLocal = localStorage.getItem("cities[key]");
+    const carsFromLocal = localStorage.getItem('cars[key]');
+    
+    if(citiesFromLocal !== null && carsFromLocal !== null){
+      setCities(JSON.parse(citiesFromLocal));
+      setCars(JSON.parse(carsFromLocal));
+    }else{
+      fetchData();
+    }
+   
+   
 
+  }, []);
+  
+  useEffect(()=>{
+    localStorage.setItem("cities[key]",JSON.stringify(cities));
+   localStorage.setItem('cars[key]',JSON.stringify(cars));
+  },[cities,cars]);
 
 
   const handleDelete = (city) => {
@@ -65,7 +81,7 @@ export default function Admin({
 
   const handleCityUpdate = (cityDetails, city_id) => {
     const editedCity = [...cities];
-    const index = editedCity.findIndex((c) => c.id === city_id);
+    const index = editedCity.findIndex(c => c.id === city_id);
     editedCity[index] = cityDetails;
     setCities(editedCity);
   };

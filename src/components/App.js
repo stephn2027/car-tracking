@@ -17,25 +17,25 @@ function App() {
   });
 
   const [operators, setOperators] = useState(operatorsList);
-  const [managers, setmanagers] = useState(adminList);
+  const [managers, setManagers] = useState(adminList);
 
   const [user, setUser] = useState({ name: '', email: '' });
   const [error, setError] = useState('');
 
   const login = (details) => {
+    setAdmin(details);
     if (
       (details.email === currentAdmin.email &&
         details.password === currentAdmin.password) ||
       details.password === currentOperator.password
     ) {
-      console.log(`${details.name} 'Logged In'`);
       setUser({ name: details.name, email: details.email });
     } else {
       setError('details do not match!');
     }
   };
 
-  const logout = (details) => setUser({ name: '', email: '' });
+  const logout = () => setUser({ name: '', email: '' });
 
   const addOperator = (operator) => {
     const newOperator = {
@@ -47,22 +47,35 @@ function App() {
     setOperators([...operators, newOperator]);
   };
 
-  const handleUserChange =(userDetails,user_id)=>{
+  const handleUserChange = (userDetails, user_id) => {
     const newOperator = [...operators];
-    const index = newOperator.findIndex(o=>o.id===user_id)
+    const index = newOperator.findIndex((o) => o.id === user_id);
     newOperator[index] = userDetails;
     setOperators(newOperator);
-  }
+  };
 
   const deleteOperator = (operator_id) => {
     const filteredOperators = operators.filter((o) => o.id !== operator_id);
     setOperators(filteredOperators);
   };
 
+  useEffect(() => {
+    const operatorsFromLocal = localStorage.getItem('operators[key]');
+    operatorsFromLocal?setOperators(JSON.parse(operatorsFromLocal)):setOperators(operatorsList);
+    
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem('operators[key]',JSON.stringify(operators));
+  
+  }, [operators])
+
+
+  
+
   return (
     <React.Fragment>
       <div className="App">
-      
         {user.email !== '' ? (
           user.email === currentAdmin.email ? (
             <Admin
@@ -81,7 +94,6 @@ function App() {
         ) : (
           <Login login={login} error={error} />
         )}
-        
       </div>
     </React.Fragment>
   );
@@ -92,8 +104,8 @@ const adminList = [
   { name: 'Tabitha', email: 'admin2@admin.com', password: 'admintwo' },
 ];
 const operatorsList = [
-  { id:uuid(),name: 'Jessie', email: 'user@user.com', password: 'user123' },
-  { id:uuid(),name: 'Patrick', email: 'user2@user.com', password: '' },
+  { id: uuid(), name: 'Jessie', email: 'user@user.com', password: 'user123' },
+  { id: uuid(), name: 'Patrick', email: 'user2@user.com', password: '' },
 ];
 
 export default App;

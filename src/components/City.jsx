@@ -51,10 +51,14 @@ function City(props) {
           <TableHead />
           <tbody>
             {cities.map((city, i) => {
+              
               return (
+               
                 <React.Fragment>
+                
                   {editCityId === city.id ? (
                     <CityEdit
+                      key={city.id}
                       city={city}
                       cityID={city.id}
                       handleCityUpdate={handleCityUpdate}
